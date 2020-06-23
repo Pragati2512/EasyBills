@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} My Groups {% endblock %}
+{% block body %}
+
+       <div class="container" style="margin-top: 30px ; margin-left: 60px;">
+           Your registration was Successful. Please verify to continue!!
+           <br> <br>
+        <form action="{% url 'Profile:verify-otp' %}"  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        OTP- <input type="number" name="otp" placeholder="Enter OTP here." required>
+            <button type="submit"> <strong> Verify </strong> </button>
+        </form>
+       </div>
+
+{% endblock %}

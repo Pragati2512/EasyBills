@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input class="form-control-file" multiple="false" accept="image/jpg,image/jpeg,image/png,application/pdf" id="fgFile" onchange="fgUpload()" type="file" name="myfile">
+    <button type="submit">Upload</button>
+
+
+    <br><br><br>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <p>Your file is of type: {{ doctype }}</p>
+    <p>Detected text in your file is:
+    <textarea readonly> {{ text }} </textarea>
+    </p>
+  {% endif %}
+
+{% endblock %}

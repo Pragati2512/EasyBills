@@ -1,0 +1,25 @@
+.sty-navbar {
+  background-color: #022663d1;
+  height: 80px;
+}
+
+body {
+  padding-top: 120px;
+}
+
+canvas {
+  height:405px;
+  width: 720px;
+  border: 1px solid #c3c3c3;
+  margin: 15px;
+  margin-top: 30px;
+  }
+
+
+.invisible_button {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}

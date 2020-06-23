@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{% static "styles/bootstrap.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "styles/mystyle.css" %}">
+
+</head>
+
+{% block head %}
+  <title>Home Page</title>
+{% endblock %}
+
+
+<body>
+<nav class="navbar navbar-expand-sm fixed-top sty-navbar">
+<div class="container" >
+    <a class="navbar-brand" ><img src="{% static "/images/logo.png" %}" width="50px"/></a>
+    <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="{% url 'Profile:home'%}"> Home </a></li>
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="#"> About Us </a></li>
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="#"> Contact </a> </li>
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="#" >  Hello {{ user.get_username }}  </a></li>
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="{% url 'Profile:logout'%}"> Logout </a></li>
+        {% else %}
+
+        <li class="nav-item"><a class="nav-link" style="color:#ffffff;" href="{% url 'Profile:login'%}">Login/Register</a></li>
+        {% endif %}
+
+
+    </ul>
+</div>
+</nav>
+</body>
+
+{% block body %}
+<h1>This is the base template. :)</h1>
+{% endblock %}
+
+
+</html>

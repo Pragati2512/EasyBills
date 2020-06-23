@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{% static "styles/bootstrap.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "styles/mystyle.css" %}">
+  <title>Home Page</title>
+</head>
+
+
+<body>
+<nav class="navbar navbar-dark navbar-expand-sm fixed-top sty-navbar">
+<div class="container">
+    <a class="navbar-brand"><img src="{% static "/images/logo.png" %}" width="50px"/></a>
+    <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Filters</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact</a> </li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+    </ul>
+</div>
+</nav>
+<h1>Your document type is {{doctype}}!!!</h1>
+</body>
+</html>

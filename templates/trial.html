@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input class="form-control-file" multiple="false" accept="image/jpg,image/jpeg,image/png,application/pdf" id="fgFile" onchange="fgUpload()" type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <p>Your file is of type: {{ doctype }}</p>
+    <p>invoice_id:</p><textarea readonly> {{ invoice_id }} </textarea>
+    <p>order_id: </p> <textarea readonly> {{ order_id }} </textarea>
+    <p>customer_id: </p> <textarea readonly> {{ customer_id }} </textarea>
+    <p>date_issue: </p> <textarea readonly> {{ date_issue }} </textarea>
+    <p>amount_total: </p> <textarea readonly> {{ amount_total }} </textarea>
+    <p>amount_due: </p> <textarea readonly> {{ amount_due }} </textarea>
+    <p>sender_name: </p> <textarea readonly> {{ sender_name }} </textarea>
+    <p>sender_address:</p><textarea readonly> {{ sender_address }} </textarea>
+    <p>sender_vat_id: </p> <textarea readonly> {{ sender_vat_id }} </textarea>
+    <p>recipient_name: </p> <textarea readonly> {{ recipient_name }} </textarea>
+    <p>recipient_address: </p> <textarea readonly> {{ recipient_address }} </textarea>
+    <p>items: </p> <textarea readonly> {{ all_items }} </textarea>
+  {% endif %}
+
+{% endblock %}

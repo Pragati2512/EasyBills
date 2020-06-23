@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %} My Groups {% endblock %}
+{% block body %}
+
+    {% if message %}
+        <div class="messages" style="color: red; margin-left: 60px;">
+             {{ message }}
+        </div>
+    {% endif %}
+
+   <div class="container" style="margin-top: 30px ; margin-left: 60px;">
+    <h2 class="text-left" > Group- {{ group.name }} </h2>
+        (created on - {{ group.created_on }} )
+       <br><br>
+           Admin - {{ group.admin.user.username }}
+       <br>
+       Permission to add members are given to {{ group.adm_settings }}.
+       <br><br>
+       <strong> Members- </strong> <br>
+        {% for mem in members %}
+            {{ forloop.counter }}. {{ mem.member.user.username }} (  {{ mem.member.number }}  )
+            <br>
+        {% endfor %}
+
+       {% if group.adm_settings == 'Everyone' or group.admin.user.id == logged_user_id  %}
+       <button class="invisible_button"  onclick="HideShow()" >  <strong>Add Members </strong> </button>
+        <br>
+       <div id="HS" style="display:none;">
+        <form action="{% url 'Profile:view-group' group.id %}"  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        Phone num- <input type="text" name="phno" placeholder="Enter phone number." required>
+            <button type="submit"> <strong> Add </strong> </button>
+        </form>
+       </div>
+        {% else %}
+           You may ask admin to add members to this group. <br><br>
+        {% endif %}
+
+
+    <button class="invisible_button"  onclick="HideShow1()" >  <strong>Upload a Bill. </strong> </button>
+        <br> <br>
+    <div id="HS1" style="display:none;">
+    <form action="{% url 'docdata:trial' group.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input class="form-control-file" multiple="false" accept="image/jpg,image/jpeg,image/png,application/pdf"
+    id="fgFile" onchange="fgUpload()" type="file" name="myfile">
+    <br>
+    <button type="submit">Upload</button>
+    </form>
+    <br> <br>
+    </div>
+
+    <strong> Documents uploaded in the group- </strong> <br>
+    <table class="table table-striped">
+                  <tr>
+                      <th>Sr. no. </th>
+                      <th>Bill</th>
+                      <th>Description</th>
+                      <th>Uploaded by</th>
+                  </tr>
+
+                      {% for doc in docs %}
+                      <tr>
+                              <td> {{ forloop.counter }}. </td>
+                              <td> {{ doc.invoice_id }} </td>
+                              <td>
+                                   Item:     {{ doc.all_items }}       <br>
+                                   Receiver: {{ doc.recipient_name }}  <br>
+                                   Sender:   {{ doc.sender_name }}     <br>
+                                   Amount:   {{ doc.amount_total }}    <br><br>
+                              </td>
+                              <td> {{ doc.rawdata.user.user.username }} <br>
+                                     on {{ doc.rawdata.date_created }}
+
+                              </td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+    <br><br>
+    <INPUT TYPE="button"  VALUE="Back"  onClick="history.go(-1);">
+    </div>
+
+
+
+
+<script>
+    function HideShow() {
+  var x = document.getElementById("HS");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function HideShow1() {
+  var x = document.getElementById("HS1");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+
+
+{% endblock %}
+

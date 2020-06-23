@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Register</title>
+{% endblock %}
+
+<style>
+.container {
+  width: 500px;
+  clear: both;
+}
+
+.container input {
+  width: 100%;
+  clear: both;
+}
+</style>
+
+{% block body %}
+
+        {% if message %}
+                <div class="messages" style="color: red; margin-left: 60px;">
+                    {{ message }}
+                </div>
+        {% endif %}
+
+<div class="container" style="padding: 30px">
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form1 %}
+      <p>
+        {{ field.label_tag }} - {{ field }}
+          {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+
+    {% for field in form2 %}
+      <p>
+        {{ field.label_tag }} - {{ field }}
+          {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    (Please give numbers with country codes without spaces. Example: +919876543210.)
+    <br><br>
+    <button type="submit">Register</button>
+    <br><br>
+</form>
+      Already have an account? <a href="{% url 'Profile:login'%}" target="blank"><strong>Login here</strong></a>!
+
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+    {% block head %}
+
+        <title>Home</title>
+
+        <style>
+        </style>
+
+
+     {% endblock %}
+
+
+    {% block body %}
+
+              <div class="row col-lg-6" style="padding-left: 150px;">
+                <form class="navbar-form navbar-left" method="post" action="{% url 'docdata:bill-search' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="srh" class="form-control" placeholder="Enter bill data." >
+                        <button type="submit"> Search</button>
+                    </div>
+                </form>
+              </div>
+
+     <div class="container" style="padding: 30px">
+
+     {% if request.user.is_authenticated %}
+      Hello Every one!
+      You can upload your bills personally or create groups.
+         <br>
+      <a href="{% url 'Profile:create-group'%}" target="blank">
+          <strong> Click here to create a new group. </strong>
+      </a>
+      <br> <br>
+      Once you have made a group-<br>
+      <a href="{% url 'Profile:my-groups'%}" target="blank">
+          <strong> View my groups. </strong>
+      </a>
+      {% else %}
+
+
+             <div class="messages" style="color:blue; margin-left: 60px;">
+                 You need to log in first. :)
+             </div>
+      <br> <br>
+      Hello Every one!
+      You can upload your bills personally or create groups.
+         <br>
+      <a href="#" target="blank">
+          <strong> Click here to create a new group. </strong>
+      </a>
+      <br> <br>
+      Once you have made a group-<br>
+      <a href="#" target="blank">
+          <strong> View my groups. </strong>
+      </a>
+      {% endif %}
+
+      <br> <br> <br> <br> <br>
+
+      <a href="{% url 'api:list'%}" target="blank">
+          <strong> View all API s. </strong>
+      </a>
+
+     </div>
+
+
+    {% endblock %}
